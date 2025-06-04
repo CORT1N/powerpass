@@ -1,0 +1,55 @@
+{
+  "name": "Password Manager Devcontainer",
+  "dockerComposeFile": ["docker-compose.yml"],
+  "service": "frontend",
+  // "service": "backend",
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+        "extensions": [
+          "ms-python.python",
+          "charliermarsh.ruff",
+          "esbenp.prettier-vscode",
+          "dbaeumer.vscode-eslint",
+          "aaron-bond.better-comments",
+          "mikestead.dotenv",
+          "usernamehw.errorlens",
+          "rodrigovallades.es7-react-js-snippets",
+          "dsznajder.es7-react-js-snippets",
+          "wholroyd.jinja",
+          "KevinRose.vsc-python-indent",
+          "BriteSnow.vscode-toggle-quotes",
+          "njpwerner.autodocstring",
+          "tal7aouy.icons",
+          "kisstkondoros.vscode-gutter-preview",
+          "VisualStudioExptTeam.vscodeintellicode",
+          "VisualStudioExptTeam.intellicode-api-usage-examples",
+          "ms-vscode.vscode-typescript-next",
+          "fnando.linter",
+          "yzhang.markdown-all-in-one",
+          "DavidAnson.vscode-markdownlint",
+          "mushan.vscode-paste-image",
+          "quicktype.quicktype",
+          "christian-kohler.path-intellisense",
+          "ms-ossdata.vscode-pgsql",
+          "YoavBls.pretty-ts-errors",
+          "ms-python.vscode-pylance",
+          "ms-python.vscode-python-envs",
+          "donjayamanne.python-extension-pack",
+          "mechatroner.rainbow-csv",
+          "shardulm94.trailing-spaces",
+          "pmneo.tsimporter",
+          "styled-components.vscode-styled-components",
+          "PascalReitermann93.vscode-yaml-sort",
+          "GitHub.copilot",
+          "GitHub.copilot-chat"
+        ],
+        "settings": {
+            "python.defaultInterpreterPath": "/usr/local/bin/python",
+            "terminal.integrated.shell.linux": "/bin/bash",
+            "ruff.lint.select": ["ALL"]
+        }
+    }
+  },
+  "forwardPorts": [3000, 5432, 8000]
+}
