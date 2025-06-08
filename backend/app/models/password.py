@@ -23,11 +23,6 @@ class Password(Base):
 
 
     owner = relationship("User", back_populates="passwords")
-    shared_links = relationship(
-        "SharedPasswordLink",
-        back_populates="password",
-        cascade="all, delete-orphan",
-        )
     versions = relationship(
         "PasswordVersion",
         back_populates="password",

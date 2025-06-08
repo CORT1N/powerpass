@@ -23,7 +23,7 @@ def read_password_versions(
 ) -> list[PasswordVersion]:
     """Retrieve all versions of a specific password for the authenticated user."""
     password = get_password_by_id(db, password_id)
-    if not password or password.owner_id != user.id:
+    if not password or password.owner.id != user.id:
         raise HTTPException(status_code=404, detail="Password not found")
 
     return get_versions_by_password(db, password_id)
@@ -40,7 +40,7 @@ def read_password_version(
     if not version:
         raise HTTPException(status_code=404, detail="Version not found")
 
-    if version.password.owner_id != user.id:
+    if version.password.owner.id != user.id:
         raise HTTPException(status_code=403, detail="Not authorized")
 
     return version

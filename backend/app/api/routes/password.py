@@ -35,7 +35,7 @@ def create_new_password(
     password: PasswordCreate,
 ) -> Password:
     """Create a new password entry for the current user."""
-    return create_password(db, user, password)
+    return create_password(db, user.id, password)
 
 
 @router.get("/{password_id}", response_model=PasswordRead)
@@ -46,7 +46,7 @@ def read_password(
 ) -> Password:
     """Retrieve a specific password entry by its ID for the current user."""
     password = get_password_by_id(db, password_id)
-    if not password or password.owner_id != user.id:
+    if not password or password.owner.id != user.id:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Password not found",
@@ -63,7 +63,7 @@ def update_existing_password(
 ) -> Password:
     """Update an existing password entry for the current user."""
     password = get_password_by_id(db, password_id)
-    if not password or password.owner_id != user.id:
+    if not password or password.owner.id != user.id:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Password not found",
@@ -79,7 +79,7 @@ def delete_password_entry(
 ) -> None:
     """Delete a specific password entry by its ID for the current user."""
     password = get_password_by_id(db, password_id)
-    if not password or password.owner_id != user.id:
+    if not password or password.owner.id != user.id:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Password not found",

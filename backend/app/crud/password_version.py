@@ -15,14 +15,12 @@ def create_password_version(
     db: Session,
     password_id: int,
     encrypted_password: str,
-    modified_by: int | None = None,
 ) -> PasswordVersion:
     """Create a new password version entry."""
     version = PasswordVersion(
         password_id=password_id,
         encrypted_password=encrypted_password,
         modified_at=datetime.now(tz=ZoneInfo("Europe/Paris")),
-        modified_by=modified_by,
     )
     db.add(version)
     db.commit()

@@ -20,7 +20,7 @@ class PasswordRead(PasswordBase):
     """Schema for reading password data."""
 
     id: int
-    shared_link: str | None = None
+    encrypted_password: str
 
 class PasswordUpdate(BaseModel):
     """Schema for updating an existing password."""

@@ -9,6 +9,7 @@ if TYPE_CHECKING:
     from app.schemas.password import PasswordCreate, PasswordUpdate
 
 from app.models.password import Password
+from app.crud.password_version import create_password_version
 
 
 def create_password(db: Session, user_id: int, data: PasswordCreate) -> Password:
@@ -22,6 +23,11 @@ def create_password(db: Session, user_id: int, data: PasswordCreate) -> Password
     db.add(password)
     db.commit()
     db.refresh(password)
+    create_password_version(
+        db=db,
+        password_id=password.id,
+        encrypted_password=data.encrypted_password,
+    )
     return password
 
 
@@ -41,6 +47,11 @@ def update_password(db: Session, password: Password, data: PasswordUpdate) -> Pa
         setattr(password, field, value)
     db.commit()
     db.refresh(password)
+    create_password_version(
+        db=db,
+        password_id=password.id,
+        encrypted_password=data.encrypted_password,
+    )
     return password
 
 

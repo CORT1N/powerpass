@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import secrets
 from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
+
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -13,7 +15,9 @@ from app.models.shared_password_link import SharedPasswordLink
 
 def generate_shared_link(
     db: Session,
-    password_id: int,
+    ciphertext: bytes,
+    nonce: bytes,
+    algo: str = "aes-256-gcm",
     created_by: int | None = None,
     expires_in_minutes: int | None = None,
     max_views: int | None = None,
@@ -21,13 +25,15 @@ def generate_shared_link(
     """Generate and save a new shared link for a password."""
     token = secrets.token_urlsafe(32)
     expires_at = (
-        datetime.now(timezone.utc) + timedelta(minutes=expires_in_minutes)
+        datetime.now(tz=ZoneInfo("Europe/Paris")) + timedelta(minutes=expires_in_minutes)
         if expires_in_minutes is not None
         else None
     )
     shared_link = SharedPasswordLink(
         token=token,
-        password_id=password_id,
+        ciphertext=ciphertext,
+        nonce=nonce,
+        algo=algo,
         created_by=created_by,
         created_at=datetime.now(timezone.utc),
         expires_at=expires_at,
@@ -38,7 +44,6 @@ def generate_shared_link(
     db.commit()
     db.refresh(shared_link)
     return shared_link
-
 
 def get_shared_link_by_token(db: Session, token: str) -> SharedPasswordLink | None:
     """Retrieve a shared password link by its token."""
