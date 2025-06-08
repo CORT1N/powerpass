@@ -4,6 +4,7 @@
   "service": "frontend",
   // "service": "backend",
   "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose",
   "customizations": {
     "vscode": {
         "extensions": [
@@ -47,9 +48,11 @@
         "settings": {
             "python.defaultInterpreterPath": "/usr/local/bin/python",
             "terminal.integrated.shell.linux": "/bin/bash",
-            "ruff.lint.select": ["ALL"]
+            "ruff.lint.select": ["ALL"],
+            "git.path": "/usr/bin/git"
         }
     }
   },
-  "forwardPorts": [3000, 5432, 8000]
+  "forwardPorts": [3000, 5432, 8000],
+  "postCreateCommand": "apk add --no-cache git"
 }
