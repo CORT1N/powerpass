@@ -1,0 +1,12 @@
+FROM node:24.1.0-alpine3.22
+
+WORKDIR /workspace/frontend
+
+COPY package*.json .
+
+RUN npm install --no-cache \
+    && apk add --no-cache git=2.49.0-r0
+
+EXPOSE 3000
+
+CMD ["npm", "run", "dev", "--", "--port", "3000", "--host"]

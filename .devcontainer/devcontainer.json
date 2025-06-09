@@ -1,8 +1,7 @@
 {
   "name": "Password Manager Devcontainer",
   "dockerComposeFile": ["docker-compose.yml"],
-  "service": "frontend",
-  // "service": "backend",
+  "service": "backend",
   "workspaceFolder": "/workspace",
   "shutdownAction": "stopCompose",
   "customizations": {
@@ -48,11 +47,9 @@
         "settings": {
             "python.defaultInterpreterPath": "/usr/local/bin/python",
             "terminal.integrated.shell.linux": "/bin/bash",
-            "ruff.lint.select": ["ALL"],
-            "git.path": "/usr/bin/git"
+            "ruff.lint.select": ["ALL"]
         }
     }
   },
-  "forwardPorts": [3000, 5432, 8000],
-  "postCreateCommand": "apk add --no-cache git"
+  "forwardPorts": [3000, 5432, 8000]
 }

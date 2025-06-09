@@ -14,26 +14,26 @@ services:
   backend:
     build:
       context: ../backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     depends_on:
       - db
     environment:
       DATABASE_URL: postgresql://powerpass:powerpass@db:5432/powerpass
-    # volumes:
-    #   - ../:/workspace
-    command: fastapi dev app/main.py --port 8000 --host 0.0.0.0
+    volumes:
+      - ../:/workspace
+    working_dir: /workspace/backend
     ports:
       - "8000:8000"
 
   frontend:
     build:
       context: ../frontend
-      dockerfile: Dockerfile
-    depends_on:
-      - backend
+      dockerfile: Dockerfile.dev
     volumes:
       - ../:/workspace
-    command: npm run dev -- --port 3000 --host
+    working_dir: /workspace/frontend
+    depends_on:
+      - backend
     ports:
       - "3000:3000"
 
