@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createSharedLink } from "../api/sharedLinks";
+import { createSharedLink } from "../../api/sharedLinks";
 import { X, Share2, Clock, Eye, Link as LinkIcon, Copy } from "lucide-react";
 
 interface Props {
@@ -38,7 +38,6 @@ export default function SharePasswordModal({ password, name, onClose, onLinkCrea
     if (sharedUrl) {
       try {
         await navigator.clipboard.writeText(sharedUrl);
-        // You could add a toast notification here
       } catch (err) {
         console.error('Failed to copy:', err);
       }
@@ -46,7 +45,7 @@ export default function SharePasswordModal({ password, name, onClose, onLinkCrea
   };
 
   return (
-    <div 
+    <div
       className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
       onClick={onClose}
     >
@@ -54,7 +53,6 @@ export default function SharePasswordModal({ password, name, onClose, onLinkCrea
         className="bg-background-secondary border border-gray-700 rounded-xl w-full max-w-md animate-fade-in"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-700">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-green-500/20 rounded-lg">
@@ -72,15 +70,12 @@ export default function SharePasswordModal({ password, name, onClose, onLinkCrea
             <X className="h-5 w-5 text-text-muted" />
           </button>
         </div>
-
-        {/* Content */}
         <div className="p-6">
           {error && (
             <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg">
               <p className="text-red-400 text-sm">{error}</p>
             </div>
           )}
-
           {sharedUrl ? (
             <div className="space-y-4">
               <div className="text-center mb-4">
@@ -90,7 +85,6 @@ export default function SharePasswordModal({ password, name, onClose, onLinkCrea
                 <h4 className="text-lg font-medium text-white mb-1">Lien créé avec succès !</h4>
                 <p className="text-text-secondary text-sm">Partagez ce lien de manière sécurisée</p>
               </div>
-              
               <div>
                 <label className="block text-text-secondary text-sm mb-2">Lien de partage</label>
                 <div className="flex space-x-2">
@@ -107,7 +101,6 @@ export default function SharePasswordModal({ password, name, onClose, onLinkCrea
                   </button>
                 </div>
               </div>
-              
               <button onClick={onClose} className="btn-primary w-full">
                 Fermer
               </button>
@@ -129,7 +122,6 @@ export default function SharePasswordModal({ password, name, onClose, onLinkCrea
                   className="input-primary w-full"
                 />
               </div>
-              
               <div>
                 <label className="flex items-center space-x-2 text-text-secondary text-sm mb-2">
                   <Eye className="h-4 w-4" />
@@ -145,18 +137,17 @@ export default function SharePasswordModal({ password, name, onClose, onLinkCrea
                   className="input-primary w-full"
                 />
               </div>
-              
               <div className="flex space-x-3 pt-4">
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   disabled={loading}
                   className="btn-primary flex-1"
                 >
                   {loading ? "Création..." : "Créer le lien"}
                 </button>
-                <button 
-                  type="button" 
-                  onClick={onClose} 
+                <button
+                  type="button"
+                  onClick={onClose}
                   disabled={loading}
                   className="btn-secondary"
                 >

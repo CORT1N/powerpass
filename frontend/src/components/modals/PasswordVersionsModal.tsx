@@ -1,7 +1,7 @@
 
-import { fetchPasswordVersions } from "../api/passwordVersion";
+import { fetchPasswordVersions } from "../../api/passwordVersion";
 import { useEffect, useState } from "react";
-import type { PasswordVersion } from "../api/passwordVersion";
+import type { PasswordVersion } from "../../api/passwordVersion";
 import { X, History, Calendar, Key, Clock } from "lucide-react";
 
 interface Props {
@@ -34,7 +34,6 @@ export default function PasswordVersionsModal({ passwordId, onClose, name }: Pro
   return (
     <div className="fixed inset-0 modal-backdrop flex items-center justify-center z-50 p-4">
       <div className="glass-effect border border-gray-700/50 rounded-2xl w-full max-w-4xl max-h-[80vh] flex flex-col animate-fade-in-up">
-        {/* Enhanced Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-700/50">
           <div className="flex items-center space-x-4">
             <div className="p-3 bg-gradient-to-br from-primary-500/20 to-primary-600/20 rounded-xl border border-primary-500/30">

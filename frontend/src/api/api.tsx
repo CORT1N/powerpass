@@ -15,9 +15,11 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && error.response.status === 401) {
+    const isAuthRoute = error.config?.url?.includes("/auth/login");
+
+    if (error.response && error.response.status === 401 && !isAuthRoute) {
       localStorage.removeItem("access_token");
-      window.location.href = "/login";
+      sessionStorage.removeItem("aesKey");
     }
     return Promise.reject(error);
   }

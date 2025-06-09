@@ -6,7 +6,7 @@
   --bg-secondary: #1a1a1a;
   --bg-tertiary: #2a2a2a;
   --bg-accent: #333333;
-  --bg-card: #1e1e1e;
+  --bg-card: #1e1e1e40;
   
   --text-primary: #ffffff;
   --text-secondary: #b3b3b3;
@@ -44,10 +44,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
+}
+
+body, h1, h2, h3, p {
   margin: 0;
-  padding: 0;
 }
 
 body {
@@ -77,9 +79,8 @@ body {
   background: linear-gradient(135deg, var(--accent-orange-dark), var(--accent-orange));
 }
 
-/* Enhanced Utility Classes */
 .glass-effect {
-  background: rgba(26, 26, 26, 0.85);
+  background: rgba(26, 26, 26, 0.25);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 107, 0, 0.1);
   box-shadow: var(--shadow-md);
@@ -185,16 +186,16 @@ body {
   transform: scale(1.05);
 }
 
-/* Enhanced Input Styles */
 .input-primary {
   background: var(--bg-card);
   border: 2px solid var(--border-primary);
   color: var(--text-primary);
-  padding: 14px 18px;
-  border-radius: 12px;
+  padding: 14px 56px;
+  border-radius: 9px;
   font-size: 14px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-sm);
+  width: 100%;
 }
 
 .input-primary:focus {
@@ -206,6 +207,34 @@ body {
 
 .input-primary::placeholder {
   color: var(--text-muted);
+}
+
+.link-animated {
+  position: relative;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.link-animated::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.link-animated:hover {
+  color: var(--accent-orange-hover);
+}
+
+.link-animated:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 /* Enhanced Card Styles */
@@ -332,7 +361,6 @@ body {
   animation: shimmer 2s infinite;
 }
 
-/* Loading spinner */
 .spinner {
   width: 40px;
   height: 40px;
@@ -406,7 +434,6 @@ body {
   visibility: visible;
 }
 
-/* Search highlight */
 .search-highlight {
   background: rgba(255, 107, 0, 0.2);
   color: var(--accent-orange);
@@ -414,7 +441,6 @@ body {
   border-radius: 4px;
 }
 
-/* Category badge */
 .category-badge {
   background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), rgba(255, 107, 0, 0.05));
   color: var(--accent-orange-light);
@@ -426,7 +452,6 @@ body {
   backdrop-filter: blur(4px);
 }
 
-/* Floating action button */
 .fab {
   position: fixed;
   bottom: 24px;
